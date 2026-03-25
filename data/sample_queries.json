@@ -1,0 +1,20 @@
+[
+  {
+    "id": "sq001",
+    "query": "Explain the difference between context precision and context recall.",
+    "expected_sources": ["retrieval_docs", "evaluation_guide"],
+    "complexity": "medium"
+  },
+  {
+    "id": "sq002",
+    "query": "How can I detect hallucinations in a RAG-generated response?",
+    "expected_sources": ["hallucination_guide", "faithfulness_docs"],
+    "complexity": "high"
+  },
+  {
+    "id": "sq003",
+    "query": "What is the role of LLM-as-a-Judge in RAG evaluation?",
+    "expected_sources": ["evaluation_techniques"],
+    "complexity": "medium"
+  }
+]
