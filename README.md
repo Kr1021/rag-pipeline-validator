@@ -1,70 +1,115 @@
 # RAG Pipeline Validator
 
-An automated validation and testing toolkit for Retrieval-Augmented Generation (RAG) pipelines. Ensures retrieval accuracy, response grounding, and end-to-end pipeline integrity for production AI systems.
+> Automated validation and testing toolkit for RAG pipelines. Ensures retrieval accuracy, response grounding, and end-to-end pipeline integrity for production AI systems.
+
+---
 
 ## Overview
 
-RAG systems are complex multi-stage pipelines where failures can occur at the retrieval, augmentation, or generation stage. This toolkit provides targeted validation at each stage to ensure reliable, grounded AI outputs aligned with governance standards.
+RAG systems are complex multi-stage pipelines where failures can occur at retrieval, augmentation, or generation. This toolkit provides targeted validation at each stage to ensure reliable, grounded AI outputs.
 
-## Features
+---
 
-- **Retrieval Accuracy Testing**: Validate that the retriever surfaces relevant context for given queries
-- - **Response Grounding Checks**: Ensure generated responses are grounded in retrieved documents
-  - - **Context Relevance Scoring**: Measure how relevant retrieved chunks are to the input query
-    - - **Faithfulness Evaluation**: Detect when the LLM deviates from the retrieved context
-      - - **End-to-End Pipeline Tests**: Automated integration tests for full RAG workflows
-        - - **Latency & Performance Benchmarks**: Track pipeline response times and throughput
-          - - **Compliance Reporting**: Generate audit-ready validation reports
-           
-            - ## Tech Stack
-           
-            - - **Language**: Python 3.10+
-              - - **RAG Framework**: LangChain, LlamaIndex
-                - - **Evaluation**: RAGAS, custom scoring modules
-                  - - **Vector Store**: FAISS, Pinecone (configurable)
-                    - - **Cloud**: AWS (S3, Lambda)
-                      - - **Testing**: Pytest, automated CI/CD pipelines
-                        - - **Monitoring**: CloudWatch, AI observability tools
-                         
-                          - ## Project Structure
-                         
-                          - ```
-                            rag-pipeline-validator/
-                            ├── validators/
-                            │   ├── retrieval_validator.py
-                            │   ├── grounding_checker.py
-                            │   └── faithfulness_scorer.py
-                            ├── benchmarks/
-                            │   ├── latency_benchmark.py
-                            │   └── throughput_test.py
-                            ├── reports/
-                            │   └── validation_report_generator.py
-                            ├── tests/
-                            │   ├── test_retrieval.py
-                            │   └── test_end_to_end.py
-                            ├── configs/
-                            │   └── pipeline_config.yaml
-                            ├── requirements.txt
-                            └── README.md
-                            ```
+## Core Validation Layers
 
-                            ## Evaluation Metrics
+### 1. Retrieval Effectiveness
+Ensures the system pulls correct documents from large, noisy datasets.
 
-                            | Metric | Description |
-                            |---|---|
-                            | Context Recall | % of relevant documents retrieved |
-                            | Context Precision | Relevance of retrieved chunks |
-                            | Answer Faithfulness | Grounding of response to context |
-                            | Answer Relevance | Relevance of response to query |
+- **Context Precision** — Signal-to-noise ratio of retrieved chunks
+- **Context Recall** — Coverage of all information needed to answer
 
-                            ## Use Cases
+### 2. Generation Soundness
+Validates answers are derived only from retrieved context.
 
-                            - Pre-deployment validation of RAG applications
-                            - - Continuous regression testing for retrieval pipelines
-                              - - Identifying retrieval bottlenecks and generation errors
-                                - - Governance and compliance audits for AI systems
-                                 
-                                  - ## Author
-                                 
-                                  - **Kumar Puvvalla** — AI Engineer | Generative AI Systems | RAG Pipelines
-                                  - [LinkedIn](https://www.linkedin.com/in/kumar-puvvalla-827a95394/) | [GitHub](https://github.com/Kr1021)
+- **Faithfulness** — Factual consistency between answer and context
+- **Hallucination Rate** — Claims not grounded in retrieved documents
+
+### 3. Task-Level Utility
+Measures if the final answer solves the user's request.
+
+- **Answer Correctness** — End-to-end accuracy against ground truth
+- **Answer Relevance** — Alignment of response to original query
+
+---
+
+## Techniques
+
+- **LLM-as-a-Judge** — GPT-4o evaluates retriever/generator outputs against ground truth
+- **Synthetic Data Generation** — Golden datasets for complex multi-hop query testing
+- **Agentic Evaluation** — Assesses agent planning, tool use, and iteration quality
+- **Filtering & Reranking Check** — Validates re-ranker improvements and noise reduction
+
+---
+
+## Common Challenges
+
+- **Hallucination Detection** — Distinguishing missing info from fabrication
+- **Context Fragmentation** — Ensuring chunking preserves answer-critical context
+- **Authorization Controls** — Preventing agents from accessing unauthorised data
+- **Verbose vs Precise** — LLM judges may favour concise over complete responses
+
+---
+
+## Evaluation Metrics
+
+| Metric | Description | Threshold |
+|---|---|---|
+| Context Precision | Signal-to-noise of retrieved chunks | > 0.70 |
+| Context Recall | Coverage of relevant documents | > 0.75 |
+| Faithfulness | Answer grounding in context | > 0.85 |
+| Answer Correctness | End-to-end accuracy | > 0.80 |
+| Answer Relevance | Query-response alignment | > 0.75 |
+
+---
+
+## Tech Stack
+
+| Layer | Tools |
+|---|---|
+| Language | Python 3.10+ |
+| RAG Framework | LangChain, LlamaIndex |
+| Evaluation | RAGAS, custom scoring modules |
+| LLM Judge | OpenAI GPT-4o |
+| Vector Store | FAISS, Pinecone |
+| Testing | Pytest |
+| Cloud | AWS (S3, Lambda) |
+
+---
+
+## Project Structure
+```
+rag-pipeline-validator/
+├── validators/
+│   ├── retrieval_validator.py
+│   ├── faithfulness_scorer.py
+│   ├── context_precision.py
+│   ├── context_recall.py
+│   ├── hallucination_detector.py
+│   └── answer_correctness.py
+├── evaluation/
+│   ├── llm_judge.py
+│   ├── synthetic_data_generator.py
+│   ├── agentic_evaluator.py
+│   └── pipeline_evaluator.py
+├── challenges/
+│   ├── chunking_validator.py
+│   └── auth_control_checker.py
+├── data/
+│   ├── golden_dataset.json
+│   └── sample_queries.json
+├── tests/
+│   ├── test_faithfulness.py
+│   └── test_end_to_end.py
+├── configs/
+│   └── pipeline_config.yaml
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## Author
+
+**Kumar Puvvalla** — AI Engineer | Generative AI | LLM Evaluation | RAG Pipelines
+
+[LinkedIn](https://www.linkedin.com/in/kumar-puvvalla-827a95394/) | [GitHub](https://github.com/Kr1021)
