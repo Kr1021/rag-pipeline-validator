@@ -1,0 +1,23 @@
+[
+  {
+    "id": "q001",
+    "question": "What is context precision in RAG evaluation?",
+    "context": "Context precision measures the signal-to-noise ratio of retrieved chunks, indicating how many retrieved documents are actually relevant to the query.",
+    "ground_truth": "Context precision is the ratio of relevant retrieved chunks to total retrieved chunks.",
+    "question_type": "factoid"
+  },
+  {
+    "id": "q002",
+    "question": "How does hallucination detection work in RAG pipelines?",
+    "context": "Hallucination detection involves verifying each claim in the generated answer against the retrieved context to identify statements not grounded in source documents.",
+    "ground_truth": "Hallucination detection checks each answer claim against retrieved context to find unsupported statements.",
+    "question_type": "factoid"
+  },
+  {
+    "id": "q003",
+    "question": "What metrics are used to evaluate retrieval effectiveness?",
+    "context": "Retrieval effectiveness is measured using context precision (relevance of retrieved chunks) and context recall (coverage of all necessary information).",
+    "ground_truth": "Context precision and context recall are the primary metrics for retrieval effectiveness.",
+    "question_type": "multi-hop"
+  }
+]
