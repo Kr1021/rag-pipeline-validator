@@ -1,0 +1,40 @@
+pipeline:
+  name: rag-pipeline-validator
+  version: "1.0.0"
+
+retrieval:
+  vector_store: faiss
+  top_k: 5
+  embedding_model: text-embedding-3-small
+  reranker: cross-encoder/ms-marco-MiniLM-L-6-v2
+
+generation:
+  model: gpt-4o
+  temperature: 0.0
+  max_tokens: 1024
+
+validation:
+  thresholds:
+    context_precision: 0.70
+    context_recall: 0.75
+    faithfulness: 0.85
+    answer_correctness: 0.80
+    answer_relevance: 0.75
+    hallucination_rate: 0.15
+
+llm_judge:
+  model: gpt-4o
+  temperature: 0.0
+  evaluation_batch_size: 10
+
+synthetic_data:
+  n_samples: 50
+  question_types:
+    - factoid
+    - multi-hop
+    - comparison
+    - summarisation
+
+logging:
+  level: INFO
+  output: logs/validation.log
